@@ -1,44 +1,35 @@
 class Solution {
     public boolean validPath(int n, int[][] edges, int source, int destination) {
-         boolean visited[]=new boolean[n];
-        List<List<Integer>> adj=new ArrayList<>();
+        List<List<Integer>>adj=new ArrayList<>();
         for(int i=0;i<n;i++){
-        adj.add(new ArrayList<>());
+            adj.add(new ArrayList<>());
         }
         for(int i=0;i<edges.length;i++){
-            int u=edges[i][0];
-            int v=edges[i][1];
+            int a=edges[i][0];
+            int b=edges[i][1];
+            adj.get(a).add(b);
+            adj.get(b).add(a);
 
-            adj.get(u).add(v);
-            adj.get(v).add(u);
         }
-            bfs(source,adj,n,visited);
-        if(visited[destination]==true){
-            return true;
-        }
-        else{
-            return false;
-        }
+        boolean vis[]=new boolean[adj.size()];
+        vis[source]=true;
+        bfs(source,adj,vis);
+        if(vis[destination]==true)return true;
+        else return false;
         
     }
-     static void bfs(int source,List<List<Integer>> adj,int n,boolean visited[]){
-
-       
-        Queue <Integer>q=new LinkedList<>();
-        visited[source]=true;
-        q.add(source);
-
+    public void bfs(int src,List<List<Integer>>adj, boolean vis[]){
+        Queue<Integer>q=new LinkedList<>();
+        vis[src]=true;
+        q.add(src);
         while(!q.isEmpty()){
             int curr=q.poll();
-
             for(int x:adj.get(curr)){
-                if(!visited[x]){
-                     visited[x] = true;
-                        q.add(x);
+                if(!vis[x]){
+                    q.add(x);
+                    vis[x]=true;
                 }
             }
-
-        }   
-
+        }
     }
 }
