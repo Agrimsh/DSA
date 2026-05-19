@@ -30,10 +30,10 @@ class Solution {
         int count=0;
 
         while(!q.isEmpty()){
-            int curr=q.poll();
+            int curr=q.poll();                             
             count++;
             for(int neigh:adj.get(curr)){
-                indegree[neigh]--;
+                indegree[neigh]--;                         // Topological sort
 
                 if(indegree[neigh]==0){
                     q.add(neigh);
