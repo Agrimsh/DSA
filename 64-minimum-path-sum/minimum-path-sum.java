@@ -11,7 +11,7 @@ class Solution {
     }
 
     int solve(int[][] grid, int i, int j, int n, int m, int[][] dp) {
-        if (i >= n || j >= m) {
+        if (i<0||j<0||i >= n || j >= m) {
             return Integer.MAX_VALUE;
         }
         if (i == n - 1 && j == m - 1) {
